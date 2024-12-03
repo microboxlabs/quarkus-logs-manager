@@ -4,6 +4,44 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
 
+## Application requirements
+- Docker Compose version v2.29.7-desktop.1
+- Java 21.0.5
+- Apache Maven 3.8.8
+- PostgreSQL 15
+
+
+## Running the application
+```shell script
+./run.sh
+```
+
+## SSE
+To stream the logs using SSE approach you need to connect you application to *http://localhost:8080/stream/logs/subscribe*
+```shell script
+curl -X POST http://localhost:8080/stream/logs/subscribe
+```
+Then, you can stream each log event emit over the event name *log*
+
+```json
+: Event type is logs
+event: message
+id: df2c073d-3031-4e7a-bf59-5b1bfecc09ed
+retry: 3000
+data: {
+data:   "id": "df2c073d-3031-4e7a-bf59-5b1bfecc09ed",
+data:   "eventCode": "logs",
+data:   "eventTime": "Dec 2, 2024, 10:06:44 PM",
+data:   "payload": {
+data:     "id": 0,
+data:     "timestamp": "2024-12-02 20:26:56",
+data:     "logLevel": "INFO",
+data:     "serviceName": "Service A",
+data:     "message": "Error communicate the database"
+data:   }
+data: }
+
+```
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
